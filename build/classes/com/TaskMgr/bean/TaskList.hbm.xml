@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2020-12-23 9:16:04 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.TaskMgr.bean.TaskList" table="TASKLIST">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="customername" type="java.lang.String">
+            <column name="CUSTOMERNAME" />
+        </property>
+        <property name="xtmc" type="java.lang.String">
+            <column name="XTMC" />
+        </property>
+        <property name="gnmc" type="java.lang.String">
+            <column name="GNMC" />
+        </property>
+        <property name="wtms" type="java.lang.String">
+            <column name="WTMS" />
+        </property>
+        <property name="tcr" type="java.lang.String">
+            <column name="TCR" />
+        </property>
+        <property name="tcrq" type="java.util.Date">
+            <column name="TCRQ" />
+        </property>
+        <property name="jjr" type="java.lang.String">
+            <column name="JJR" />
+        </property>
+        <property name="wcrq" type="java.util.Date">
+            <column name="WCRQ" />
+        </property>
+        <property name="yyhfx" type="java.lang.String">
+            <column name="YYHFX" />
+        </property>
+        <property name="jjff" type="java.lang.String">
+            <column name="JJFF" />
+        </property>
+        <property name="sfwc" type="java.lang.String">
+            <column name="SFWC" />
+        </property>
+        <property name="rwzt" type="java.lang.String">
+            <column name="RWZT" />
+        </property>
+        <property name="csr" type="java.lang.String">
+            <column name="CSR" />
+        </property>
+        <property name="csrq" type="java.util.Date">
+            <column name="CSRQ" />
+        </property>
+        <property name="cssm" type="java.lang.String">
+            <column name="CSSM" />
+        </property>
+        <property name="csjg" type="java.lang.String">
+            <column name="CSJG" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2020-12-23 9:16:04 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.TaskMgr.bean.Users" table="USERS">
+        <id name="ID" type="java.lang.String">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="NAME" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="LOGINNAME" type="java.lang.String">
+            <column name="LOGINNAME" />
+        </property>
+        <property name="PASSWORD" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="DEPARTMANT" type="java.lang.String">
+            <column name="DEPARTMANT" />
+        </property>
+        <property name="GROUPS" type="java.lang.String">
+            <column name="GROUPS" />
+        </property>
+        <property name="STATUS" type="java.lang.String">
+            <column name="STATUS" />
+        </property>
+        <property name="GROUPTYPE" type="java.lang.String">
+            <column name="GROUPTYPE" />
+        </property>
+    </class>
+</hibernate-mapping>

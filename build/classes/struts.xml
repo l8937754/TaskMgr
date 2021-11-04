@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+    <struts>
+     	<package name="my-interceptor" abstract ="true" extends="struts-default">
+     		<interceptors>
+     			<interceptor name="checklogin" class="loginInterceptor"></interceptor>
+     			<interceptor-stack name="my-interceptorStack">     				
+     				<interceptor-ref name="checklogin">
+     					<param name="excludeMethods">login</param>
+     				</interceptor-ref>
+     				<interceptor-ref name="defaultStack"></interceptor-ref>     				
+     			</interceptor-stack>	
+     		</interceptors>
+     		
+       		 <global-results><!--全局结果视图要放在<default-interceptor-ref>下-->
+            			<result name="login">/WEB-INF/jsp/login.jsp</result>
+        	</global-results> 	   
+        	      		
+     	</package>
+     	
+     	<package name="TaskMgr" namespace="/" extends="my-interceptor,json-default"> <!-- 一般用struts-default，返回json数据用json-default -->		      		
+      	    <default-interceptor-ref name="my-interceptorStack"/>  	      		
+     		<!-- 全局result，当没有与返回结果相配置时执行 
+     	 	<global-results>
+     			<result name="loginFail">/WEB-INF/jsp/login.jsp</result>
+     		</global-results> -->
+     		
+     		<!-- struts2  2.3以后需要加上这句配置，否则通配符*不能用，且必须挨着放在action前面，否则配置文件报错 -->
+     		<global-allowed-methods>regex:.*</global-allowed-methods> 
+     		
+     		<!--使用spring时，action的class要和springbean的 ID一致 -->
+     		
+     		<action name="index" class="index" method="loginform">
+     			<result name="login">/WEB-INF/jsp/login.jsp</result>     		
+     		</action>
+     		
+     		<action name="user_*" class="userAction" method="{1}">
+     			<result name="loginsuccess">/WEB-INF/jsp/success.jsp</result>     						
+     			<!-- <allowed-methods>longin</allowed-methods> -->
+     		</action>
+     		
+     		<action name="task_*" class="tasklist" method="{1}">
+     		  <result name="tasklist">/WEB-INF/jsp/tasklist.jsp</result>
+     		  <result name="jsondata" type="json">
+     		  	<param name="root">
+     		  			result
+     		  	</param>     		  	
+     		  </result>
+     		 <!--  <interceptor-ref name="my-interceptorStack"/>  -->
+     		</action>
+     	</package>
+    </struts>
+

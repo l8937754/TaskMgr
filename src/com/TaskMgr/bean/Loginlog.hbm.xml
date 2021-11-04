@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2020-12-23 9:16:04 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.TaskMgr.bean.Loginlog" table="USER_LOGIN">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="loginID" type="java.lang.String">
+            <column name="LOGINID" />
+        </property>
+        <property name="loginName" type="java.lang.String">
+            <column name="LOGINNAME" />
+        </property>
+        <property name="loginIP" type="java.lang.String">
+            <column name="LOGINIP" />
+        </property>
+        <property name="loginDateTime" type="java.util.Date">
+            <column name="LOGINDATETIME" />
+        </property>
+    </class>
+</hibernate-mapping>

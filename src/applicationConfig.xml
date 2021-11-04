@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"    
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+        xmlns:p="http://www.springframework.org/schema/p"  
+        xmlns:aop="http://www.springframework.org/schema/aop"   
+        xmlns:context="http://www.springframework.org/schema/context"  
+        xmlns:jee="http://www.springframework.org/schema/jee"  
+        xmlns:tx="http://www.springframework.org/schema/tx"  
+        xsi:schemaLocation="    
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd  
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+            
+     <context:property-placeholder location="classpath:jdbc.properties"/>       
+            
+     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+     	<property name="jdbcUrl" value="${jdbc.url}"></property>
+     	<property name="driverClass" value="${jdbc.classname}"></property>
+     	<property name="user" value="${jdbc.username}"></property>
+     	<property name="password" value="${jdbc.password}"></property>
+     </bean>       
+            
+    <!--所有需要类的实例都由spring去管理 -->
+    
+    <!-- 添加sessionFactory bane ,该类是Spring提供的 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" scope="prototype">
+    	<property name="dataSource" ref="dataSource"/>
+    	<!-- 数据库方言 -->
+    	<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+    			<prop key="hibernate.show_sql">true</prop>
+    			<prop key="hibernate.format_sql">true</prop>
+    			<prop key="hibernate.connection.autocommit">false</prop>
+    		</props>
+    	</property>    	
+    	<property name="mappingResources">
+    		<list>
+    			<value>com/TaskMgr/bean/Users.hbm.xml</value>
+    			<value>com/TaskMgr/bean/Loginlog.hbm.xml</value>
+    			<value>com/TaskMgr/bean/Notice.hbm.xml</value>
+    			<value>com/TaskMgr/bean/TaskList.hbm.xml</value>
+    			<value>com/TaskMgr/bean/SelectList.hbm.xml</value>
+    		</list>
+    	</property>
+    </bean>
+    
+    
+    <bean id="loginInterceptor" class="com.TaskMgr.util.checkLoginUser" scope="prototype">
+    	
+    </bean>
+    
+     <!-- Action -->
+    <bean id="index" class="com.TaskMgr.action.LoginAction" scope="prototype">
+    	
+    </bean>
+    
+    <bean id="userAction" class="com.TaskMgr.action.UserAction" scope="prototype">
+    	<property name="userserver" ref="userService"/>
+    	<property name="loginlogserver" ref="loginlogserver"/>
+    	<property name="noticeserver" ref="noticeserver"/>
+    </bean>
+    
+    <bean id="tasklist" class="com.TaskMgr.action.TaskListAction" scope="prototype">
+        <property name="tasklistservice"  ref="tasklistservice"/>
+    </bean>
+    
+    <!-- SERVER -->
+    <bean id="tasklistservice" class="com.TaskMgr.service.TaskListService" scope="prototype">
+    	<property name="tasklistdao" ref="tasklistdao"/>
+    </bean>
+    
+    <bean id="noticeserver" class="com.TaskMgr.service.NoticeServerImpl" scope="prototype">
+    	<property name="notice" ref="noticedao"></property>
+    </bean>
+    
+    <bean name="loginlogserver" class="com.TaskMgr.service.LoginLogServerImpl" scope="prototype">
+    	<property name="logdao" ref ="loginlogdao"/>
+    	
+    </bean>
+    
+    <bean id ="userService" class="com.TaskMgr.service.UserServerImpl" scope="prototype">
+     	<property name="userdao" ref="userDao"/>
+    </bean>
+    
+    
+    <!-- DAO -->
+    <bean id="tasklistdao" class="com.TaskMgr.dao.TaskListImpl" scope="prototype">
+ 		<property name="sessionFactory" ref="sessionFactory"/>   
+    </bean>
+    
+    <bean id="noticedao" class="com.TaskMgr.dao.NoticeImpl" scope="prototype">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="loginlogdao" class="com.TaskMgr.dao.LoginLogDaoImpl" scope="prototype">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="userDao" class="com.TaskMgr.dao.UsersDaoImpl" scope="prototype">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+</beans>    
+ 

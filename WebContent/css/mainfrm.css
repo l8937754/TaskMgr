@@ -1,0 +1,92 @@
+@charset "UTF-8";
+ *{margin: 0px;padding: 0px;}        	
+        	.index_head_im{
+        		height: 60px;        		
+        	}
+        	.left_menu{
+        		text-align: center;
+        		float: left;
+        		height: 800px;
+        		width: 150px;
+        		background-color:#32404D;
+        	}
+        	
+        	.menu_div{
+        		height: 30px;
+        		text-align: center;
+        		background-image: url(zhu.jpg);
+        		background-repeat: no-repeat;
+        		background-size: 30% 100%;
+        		background-position-x:0px;
+        	}
+        	
+          	.left_menu div:hover{
+        		background-color: darkgrey;
+        		
+        	}
+        	
+        	.left_menu ul li ul{
+        	
+        		display: none;
+        	}
+        	
+        	
+        	.left_menu ul li:hover{
+        		background-color: lightsteelblue;
+        	}
+        	
+        	.left_menu ul li ul li:hover{
+        		background-color: blue;
+        	}
+        	
+        	.changetr{
+        		width:100%;
+        		height:180px;
+        		
+        		font-sizt:8px;
+        	}
+        	
+        	.changetr tr{
+        		height:19%;        		
+        	}
+        	
+        	.changetr tr td{
+        		border:1px solid black;
+        		height:32px;
+        	}
+        	
+        	.changetr tr:hover{
+        	 background-color:#E1E7F6;
+        	}
+        	
+        	<!--行选中-->
+        	tr.focus{
+        		background-color:#E1E7F6;
+        	}
+        	
+       /*  *********TaskList.jsp */
+       
+         
+        .tabthead tr td{
+          background:buttonface;
+          border:1px outset #00f3ff;
+        } 	
+        
+        
+        .tasklist-head{
+         background-color:#A6CAF0;
+         height:60px;
+        }
+        
+        .tasklist-head ul{
+        	list-style: none;         	        	
+        	display: inline-flex;
+        }
+        
+        .tasklist-head ul li{
+        	margin-left:5px;
+        }
+        
+        .tasklist-head ul span{
+        	margin-left:90px;
+        }
